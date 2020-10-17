@@ -109,6 +109,25 @@
         }).then(function(response) {
           var labels = response.result.labels;
           appendPre('Labels:');
+          console.log(response)
+
+          if (labels && labels.length > 0) {
+            for (i = 0; i < labels.length; i++) {
+              var label = labels[i];
+              appendPre(label.name)
+            }
+          } else {
+            appendPre('No Labels found.');
+          }
+        });
+      }
+
+      function listLabels() {
+        gapi.client.gmail.users.labels.list({
+          'userId': 'me'
+        }).then(function(response) {
+          var labels = response.result.labels;
+          appendPre('Labels:');
 
           if (labels && labels.length > 0) {
             for (i = 0; i < labels.length; i++) {
